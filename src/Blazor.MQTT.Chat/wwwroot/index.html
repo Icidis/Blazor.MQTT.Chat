@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Blazor.MQTT.Chat</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <app>
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+            <p>Loading...</p>
+        </div>
+    </app>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <!--Third party libraries-->
+    <script src="scripts/paho-mqtt.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/paho-mqtt@1.0.4/paho-mqtt.min.js"></script>-->
+    <!--Interop libraries-->
+    <script src="scripts/paho-mqtt-interop.js" type="text/javascript"></script>
+</body>
+</html>
