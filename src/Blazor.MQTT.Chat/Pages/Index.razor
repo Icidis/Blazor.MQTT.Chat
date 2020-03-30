@@ -6,13 +6,13 @@
 <div class="container">
     <div class="row mx-lg-n5">
         <div class="col py-3 px-lg-5 border bg-light">
-            Enter your name: <input type="text" disabled="@(IsDisabled)" bind="@Name" />
+            Enter your name: <input type="text" disabled="@(IsDisabled)" @bind="@Name" />
         </div>
     </div>
     <div class="row mx-lg-n5">
         <div class="col py-3 px-lg-5">
-            <button class="btn btn-primary btn-sm" onclick="@CreateClientAndConnect" disabled="@(IsDisabled)">Connect</button>
-            <button class="btn btn-danger btn-sm" onclick="@Disconnect" disabled="@(!IsDisabled)">Disconnect</button>
+            <button class="btn btn-primary btn-sm" @onclick="@CreateClientAndConnect" disabled="@(IsDisabled)">Connect</button>
+            <button class="btn btn-danger btn-sm" @onclick="@Disconnect" disabled="@(!IsDisabled)">Disconnect</button>
         </div>
     </div>
     <div class="row mx-lg-n5">
@@ -21,9 +21,9 @@
         </div>
     </div>
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Type your message here" bind="@Message" disabled="@(!IsDisabled)" />
+        <input type="text" class="form-control" placeholder="Type your message here" @bind="@Message" disabled="@(!IsDisabled)" />
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" onclick="@PublishMessage" disabled="@(!IsDisabled)">Send</button>
+            <button class="btn btn-outline-secondary" type="button" @onclick="@PublishMessage" disabled="@(!IsDisabled)">Send</button>
         </div>
     </div>
     <div class="row">
@@ -48,7 +48,7 @@
     </div>
 </div>
 
-@functions {
+@code {
 
     private const string _rabbitMQHost = "localhost";
     private const int _rabbitMQPort = 15675;
@@ -63,7 +63,7 @@
     protected bool IsDisabled { get; set; }
     protected string Message { get; set; }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         ConnectionStatus = "Not connected";
 
@@ -88,28 +88,28 @@
         };
     }
 
-    public async void CreateClientAndConnect()
+    public void CreateClientAndConnect()
     {
         IsDisabled = true;
         this.StateHasChanged();
 
-        await mqttInterop.CreateClient(wsHost: _rabbitMQHost, wsPort: _rabbitMQPort, clientId: Name);
-        await mqttInterop.Connect(topic: _topic, qos: 1, timeout: 3, username: _rabbitMQUsername, password: _rabbitMQPassword);
+        mqttInterop.CreateClient(wsHost: _rabbitMQHost, wsPort: _rabbitMQPort, clientId: Name);
+        mqttInterop.Connect(topic: _topic, qos: 1, timeout: 3, username: _rabbitMQUsername, password: _rabbitMQPassword);
     }
 
-    public async void Disconnect()
+    public void Disconnect()
     {
-        await mqttInterop.Disconnect();
+        mqttInterop.Disconnect();
         IsDisabled = false;
         this.StateHasChanged();
     }
 
-    public async void PublishMessage()
+    public void PublishMessage()
     {
         if (!string.IsNullOrWhiteSpace(Message))
         {
             string payload = $"{Name} : {Message}";
-            await mqttInterop.Publish(topic: _topic, payload: payload, qos: 0, retained: false);
+            mqttInterop.Publish(topic: _topic, payload: payload, qos: 0, retained: false);
             Message = null;
             this.StateHasChanged();
         }

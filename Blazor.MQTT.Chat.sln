@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{855E33E9-F81
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{500FCE8F-E06E-4B4B-B4AD-A77275C4D100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.MQTT.Chat", "src\Blazor.MQTT.Chat\Blazor.MQTT.Chat.csproj", "{6ACE3C18-DF92-40CB-ABD8-6ED180B1559A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.MQTT.Chat", "src\Blazor.MQTT.Chat\Blazor.MQTT.Chat.csproj", "{6ACE3C18-DF92-40CB-ABD8-6ED180B1559A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

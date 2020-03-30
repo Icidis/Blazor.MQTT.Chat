@@ -21,7 +21,7 @@ window.mqttFunctions = {
             Blazor.platform.callMethod(methodOnConnectionChanged, null, [Blazor.platform.toDotNetString("Connection Lost")]);
         };
 
-        this.pahoClient.onMessageArrived = function (message) {
+        pahoClient.onMessageArrived = function (message) {
             console.log(message);
             console.log("RECEIVE ON " + message.destinationName + " PAYLOAD " + message.payloadString);
 
@@ -29,7 +29,7 @@ window.mqttFunctions = {
             Blazor.platform.callMethod(methodOnMessagedReceived, null, [Blazor.platform.toDotNetString(message.destinationName), Blazor.platform.toDotNetString(message.payloadString)]);
         };
 
-        this.pahoClient.onMessageDelivered = function (message) {
+        pahoClient.onMessageDelivered = function (message) {
             console.log(message);
             console.log("PUBLISHED ON " + message.destinationName + " PAYLOAD " + message.payloadString);
         };
@@ -53,7 +53,7 @@ window.mqttFunctions = {
             }
         };
 
-        if (this.pahoClient.host.toLowerCase().startsWith("https")) {
+        if (pahoClient.host.toLowerCase().startsWith("https")) {
             options.useSSL = true;
         }
         pahoClient.connect(options);

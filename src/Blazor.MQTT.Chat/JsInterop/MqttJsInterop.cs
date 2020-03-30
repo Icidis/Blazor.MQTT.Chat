@@ -1,5 +1,4 @@
 ﻿using Microsoft.JSInterop;
-using System.Threading.Tasks;
 
 namespace Blazor.MQTT.Chat.JsInterop
 {
@@ -12,29 +11,29 @@ namespace Blazor.MQTT.Chat.JsInterop
             _jsRuntime = jsRuntime;
         }
 
-        public async Task<object> CreateClient(string wsHost, int wsPort, string clientId)
+        public async void CreateClient(string wsHost, int wsPort, string clientId)
         {
-            return await _jsRuntime.InvokeAsync<object>(
+            await _jsRuntime.InvokeVoidAsync(
                 "mqttFunctions.createClient",
                 wsHost, wsPort, clientId);
         }
 
-        public async Task<object> Connect(string topic, int qos, int timeout, string username, string password)
+        public async void Connect(string topic, int qos, int timeout, string username, string password)
         {
-            return await _jsRuntime.InvokeAsync<object>(
+            await _jsRuntime.InvokeVoidAsync(
                 "mqttFunctions.connect",
                 topic, qos, timeout, username, password);
         }
 
-        public async Task<object> Disconnect()
+        public async void Disconnect()
         {
-            return await _jsRuntime.InvokeAsync<object>(
+            await _jsRuntime.InvokeVoidAsync(
                 "mqttFunctions.disconnect");
         }
 
-        public async Task<object> Publish(string topic, string payload, int qos, bool retained)
+        public async void Publish(string topic, string payload, int qos, bool retained)
         {
-            return await _jsRuntime.InvokeAsync<object>(
+            await _jsRuntime.InvokeVoidAsync(
                 "mqttFunctions.publish",
                 topic, payload, qos, retained);
         }
